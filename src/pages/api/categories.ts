@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type {NextApiRequest, NextApiResponse} from "next";
 
-type Data = {
+export type CategoryResponse = {
   categories: Category[];
 };
 
@@ -19,7 +19,7 @@ type Item = {
   imageUrl?: string;
 };
 
-const mockedData: Data = {
+const mockedData: CategoryResponse = {
   categories: [
     {
       id: "1",
@@ -32,12 +32,12 @@ const mockedData: Data = {
         },
         {
           id: "2",
-          name: "Apple",
+          name: "Tomato",
           categoryId: "1",
         },
         {
           id: "3",
-          name: "Apple",
+          name: "Pineapple",
           categoryId: "1",
         },
       ],
@@ -68,7 +68,7 @@ const mockedData: Data = {
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>,
+  res: NextApiResponse<CategoryResponse>,
 ) {
   res.status(200).json(mockedData);
 }

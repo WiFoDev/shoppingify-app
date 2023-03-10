@@ -22,7 +22,7 @@ export const Layout = ({children}: {children: ReactNode}) => {
         <link href="/favicon.ico" rel="icon" />
       </Head>
       <Header />
-      <main>{children}</main>
+      <main className="px-4">{children}</main>
       <Footer />
     </div>
   );

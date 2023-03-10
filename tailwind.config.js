@@ -1,3 +1,5 @@
+const {fontFamily} = require("tailwindcss/defaultTheme");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
@@ -17,7 +19,7 @@ module.exports = {
           "linear-gradient(81.66deg, #ff8906 7.21%, #f25f4c 45.05%, #e53170 78.07%)",
       }),
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
+        sans: ["var(--font-quicksand)", ...fontFamily.sans],
       },
       content: {
         example: "url('../assets/brush.png')",
@@ -37,8 +39,7 @@ module.exports = {
         "slide-in-right": "slideIn 0.2s ease-in",
       },
       boxShadow: {
-        outer:
-          "6px 6px 10px -1px rgba(0,0,0,0.15), -1px -1px 10px -1px rgba(255,255,255,0.7)",
+        outer: "0px 4px 12px rgba(0, 0, 0, 0.1)",
       },
       gridTemplateColumns: {
         auto: "repeat(auto-fill,minmax(18rem,1fr))",
