@@ -5,7 +5,7 @@ import emptyCartIcon from "@/assets/icons/empty_car.svg";
 export const ShoppingList = () => {
   return (
     <>
-      <div className="grid flex-1 place-items-center text-xl font-bold">
+      <div className="flex flex-1 flex-col items-center pt-20 text-xl font-bold">
         No Items
       </div>
       <Image
