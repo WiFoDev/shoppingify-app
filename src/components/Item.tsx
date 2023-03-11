@@ -1,5 +1,6 @@
 import {FC} from "react";
 import Image, {StaticImageData} from "next/image";
+import {motion} from "framer-motion";
 
 import addIcon from "@/assets/icons/add.svg";
 
@@ -8,11 +9,20 @@ export interface ItemProps {
   name: string;
 }
 
+const item = {
+  hidden: {translateY: -100, opacity: 0},
+  show: {translateY: 0, opacity: 1},
+};
+
 export const Item: FC<ItemProps> = ({id, name}) => {
   return (
-    <li
+    <motion.li
       key={id}
-      className="text-sm font-medium flex items-center justify-between p-4 rounded-xl shadow-outer"
+      animate="show"
+      className="flex items-center justify-between rounded-xl p-4 text-sm font-medium shadow-outer"
+      initial="hidden"
+      variants={item}
+      whileHover={{scale: 1.05}}
     >
       {name}
       <Image
@@ -20,6 +30,6 @@ export const Item: FC<ItemProps> = ({id, name}) => {
         className="h-6 w-6"
         src={addIcon as StaticImageData}
       />
-    </li>
+    </motion.li>
   );
 };
