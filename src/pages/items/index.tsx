@@ -11,7 +11,7 @@ const Items: NextPage = () => {
   return (
     <section className="sm:flex sm:flex-col sm:gap-10 sm:p-6">
       <div className="hidden sm:flex sm:justify-between">
-        <h1 className="basis-1/2 text-2xl font-medium">
+        <h1 className="pointer-events-none basis-1/2 text-2xl font-medium">
           <span className=" font-bold text-primary">Shoppingify</span>{" "}
           allows you take your shopping list wherever you go
         </h1>

@@ -11,7 +11,7 @@ module.exports = {
         parragraf: "#a7a9be",
         "button-text": "#fffffe",
         primary: "#ff8906",
-        secondary: "#f25f4c",
+        secondary: "#FFF0DE",
         tertiary: "#e53170",
       },
       backgroundImage: (theme) => ({

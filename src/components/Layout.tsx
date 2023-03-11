@@ -23,6 +23,7 @@ export const Layout = ({children}: {children: ReactNode}) => {
         />
         <link href="/favicon.ico" rel="icon" />
       </Head>
+      <div id="modals" />
       <Header />
       <main className="flex-1 px-4 pb-16">{children}</main>
       <Footer />
