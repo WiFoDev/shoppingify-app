@@ -25,7 +25,7 @@ module.exports = {
         example: "url('../assets/brush.png')",
       },
       keyframes: {
-        slideIn: {
+        slideRight: {
           "0%": {
             transform: "translate3d(100%, 0, 0)",
           },
@@ -34,9 +34,18 @@ module.exports = {
             transform: "translate3d(0, 0, 0)",
           },
         },
+        slideLeft: {
+          "0%": {
+            transform: "translate3d(-100%, 0, 0)",
+          },
+          "100%": {
+            transform: "translate3d(0, 0, 0)",
+          },
+        },
       },
       animation: {
-        "slide-in-right": "slideIn 0.2s ease-in",
+        "slide-in-right": "slideRight 0.2s ease-in",
+        "slide-in-left": "slideLeft 0.2s ease-in",
       },
       boxShadow: {
         outer: "0px 4px 12px rgba(0, 0, 0, 0.1)",

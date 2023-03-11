@@ -1,6 +1,6 @@
 export const AddShoppingList = () => {
   return (
-    <div className="relative rounded-br-3xl bg-white py-7 px-4">
+    <div className="relative rounded-br-3xl bg-white py-7 px-4 sm:rounded-none sm:rounded-bl-3xl">
       <input
         className="w-full rounded-lg border-2 border-gray-300 py-5 px-4 shadow-outer outline-none"
         placeholder="Enter a name"

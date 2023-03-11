@@ -34,17 +34,15 @@ export const CartModal: FC<CartModalProps> = ({onClose}) => {
     <Portal>
       <motion.div
         animate="visible"
-        className="fixed inset-0 z-10 flex bg-black/50 backdrop-blur-sm"
+        className="fixed inset-0 z-10 flex bg-black/50 backdrop-blur-sm sm:flex-row-reverse"
         initial="hidden"
         variants={backdrop}
       >
-        <motion.div
-          animate="visible"
-          className="flex flex-col"
-          initial="hidden"
-          variants={modal}
+        <div
+          className="flex animate-slide-in-left flex-col sm:animate-slide-in-right"
+          id="shopping"
         >
-          <div className="relative z-20 flex  flex-1 basis-10/12 flex-col items-center rounded-tr-3xl bg-secondary py-10 px-4 shadow-right">
+          <div className="relative z-20 flex  flex-1 basis-10/12 flex-col items-center rounded-tr-3xl bg-secondary py-10 px-4 shadow-right sm:rounded-none sm:rounded-tl-3xl">
             <button
               className="absolute top-3 right-3"
               onClick={() => onClose(false)}
@@ -59,7 +57,7 @@ export const CartModal: FC<CartModalProps> = ({onClose}) => {
             <ShoppingList />
           </div>
           <AddShoppingList />
-        </motion.div>
+        </div>
         <div
           className="h-full basis-2/12 sm:basis-10/12"
           onClick={() => onClose(false)}
