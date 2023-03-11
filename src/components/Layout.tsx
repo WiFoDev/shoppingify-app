@@ -12,7 +12,9 @@ const quicksand = Quicksand({
 
 export const Layout = ({children}: {children: ReactNode}) => {
   return (
-    <div className={`${quicksand.variable} h-screen font-sans`}>
+    <div
+      className={`${quicksand.variable} h-screen font-sans sm:flex sm:flex-row-reverse sm:overflow-hidden`}
+    >
       <Head>
         <title>Shoppingify App</title>
         <meta
@@ -22,7 +24,7 @@ export const Layout = ({children}: {children: ReactNode}) => {
         <link href="/favicon.ico" rel="icon" />
       </Head>
       <Header />
-      <main className="px-4">{children}</main>
+      <main className="px-4 flex-1 pb-16">{children}</main>
       <Footer />
     </div>
   );

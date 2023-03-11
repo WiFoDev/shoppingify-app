@@ -40,6 +40,8 @@ module.exports = {
       },
       boxShadow: {
         outer: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+        top: "0px -2px 2px -1px rgba(0,0,0,0.3)",
+        right: "2px 0px 2px -1px rgba(0,0,0,0.3)",
       },
       gridTemplateColumns: {
         auto: "repeat(auto-fill,minmax(18rem,1fr))",

@@ -5,7 +5,7 @@ import logo from "@/assets/icons/logo.svg";
 
 export const Header = () => {
   return (
-    <header className="flex items-center justify-between p-4">
+    <header className="flex items-center justify-between p-4 sm:hidden">
       <div className="flex items-center gap-2 text-xl font-semibold">
         <Image
           alt="Shoppingify Logo"

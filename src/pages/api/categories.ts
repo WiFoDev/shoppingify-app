@@ -63,6 +63,27 @@ const mockedData: CategoryResponse = {
         },
       ],
     },
+    {
+      id: "3",
+      name: "Meat And Fish",
+      items: [
+        {
+          id: "7",
+          name: "Chicken 1kg",
+          categoryId: "2",
+        },
+        {
+          id: "8",
+          name: "Salmon 1k",
+          categoryId: "2",
+        },
+        {
+          id: "9",
+          name: "Pork 1kg",
+          categoryId: "2",
+        },
+      ],
+    },
   ],
 };
 
