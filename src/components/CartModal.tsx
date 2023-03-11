@@ -1,6 +1,7 @@
 import {SetStateAction} from "jotai";
 import Image from "next/image";
-import React, {Dispatch, FC} from "react";
+import {Dispatch, FC} from "react";
+import {motion} from "framer-motion";
 
 import closeIcon from "@/assets/icons/close.svg";
 
@@ -13,11 +14,36 @@ interface CartModalProps {
   onClose: Dispatch<SetStateAction<boolean>>;
 }
 
+const backdrop = {
+  visible: {opacity: 1},
+  hidden: {opacity: 0},
+};
+
+const modal = {
+  visible: {x: 0},
+  hidden: {
+    x: -20,
+    transition: {
+      easeInOut: [0.4, 0, 0.2, 1],
+    },
+  },
+};
+
 export const CartModal: FC<CartModalProps> = ({onClose}) => {
   return (
     <Portal>
-      <div className="fixed inset-0 z-10 flex bg-black/50 backdrop-blur-sm">
-        <div className="flex flex-col">
+      <motion.div
+        animate="visible"
+        className="fixed inset-0 z-10 flex bg-black/50 backdrop-blur-sm"
+        initial="hidden"
+        variants={backdrop}
+      >
+        <motion.div
+          animate="visible"
+          className="flex flex-col"
+          initial="hidden"
+          variants={modal}
+        >
           <div className="relative z-20 flex  flex-1 basis-10/12 flex-col items-center rounded-tr-3xl bg-secondary py-10 px-4 shadow-right">
             <button
               className="absolute top-3 right-3"
@@ -33,12 +59,12 @@ export const CartModal: FC<CartModalProps> = ({onClose}) => {
             <ShoppingList />
           </div>
           <AddShoppingList />
-        </div>
+        </motion.div>
         <div
           className="h-full basis-2/12"
           onClick={() => onClose(false)}
         />
-      </div>
+      </motion.div>
     </Portal>
   );
 };
