@@ -61,7 +61,7 @@ export const CartModal: FC<CartModalProps> = ({onClose}) => {
           <AddShoppingList />
         </motion.div>
         <div
-          className="h-full basis-2/12"
+          className="h-full basis-2/12 sm:basis-10/12"
           onClick={() => onClose(false)}
         />
       </motion.div>
