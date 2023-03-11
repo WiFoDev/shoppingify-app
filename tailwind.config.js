@@ -12,7 +12,7 @@ module.exports = {
         "button-text": "#fffffe",
         primary: "#ff8906",
         secondary: "#FFF0DE",
-        tertiary: "#e53170",
+        tertiary: "#80485B",
       },
       backgroundImage: (theme) => ({
         "gradient-rainbow":
