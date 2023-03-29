@@ -3,8 +3,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 
 const Home: NextPage = () => {
-
-  const {user, isSignedIn} = useUser();
+  const { user, isSignedIn } = useUser();
 
   return (
     <>
@@ -14,8 +13,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-      {!isSignedIn ? <SignInButton/> : <SignOutButton />}
-      {user && <div>Logged in as {user.username}</div>}
+        {!isSignedIn ? <SignInButton /> : <SignOutButton />}
+        {user && <div>Logged in as {user.username}</div>}
       </main>
     </>
   );
