@@ -1,4 +1,3 @@
-import { SignOutButton, SignUpButton } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Link from "next/link";
 
@@ -8,7 +7,6 @@ const Home: NextPage = () => {
       <Link href="/sign-up" className="btn-primary btn">
         Login
       </Link>
-      <SignOutButton />
     </section>
   );
 };

@@ -16,9 +16,16 @@ export const Header = () => {
         />
         Shoppingify
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center gap-2">
         <CartButton />
-        <UserButton afterSignOutUrl="/" />
+        <UserButton
+          afterSignOutUrl="/"
+          appearance={{
+            elements: {
+              userButtonAvatarBox: "w-10 h-10",
+            },
+          }}
+        />
       </div>
     </header>
   );
