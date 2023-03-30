@@ -1,9 +1,10 @@
 import { SuperBalls } from "@uiball/loaders";
 import { api } from "~/utils/api";
+import { Category } from "./Category";
 
 export const CategoryList = () => {
   const { data, isLoading } = api.categories.getAll.useQuery();
-
+  console.log(data);
   if (isLoading)
     return (
       <div className="grid place-content-center pt-6">
@@ -17,7 +18,7 @@ export const CategoryList = () => {
     <ul className="flex flex-col gap-7">
       {data &&
         data.map((category) => {
-          return <div key={category.id}>{category.name.toUpperCase()}</div>;
+          return <Category {...category} key={category.id} />;
         })}
     </ul>
   );

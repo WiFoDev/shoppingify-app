@@ -19,7 +19,7 @@ const Items: NextPage = () => {
           </h1>
           <label className="relative cursor-pointer">
             <input
-              className="shadow-outer rounded-lg py-4 pl-14 text-sm outline-none focus:ring-2 focus:ring-primary/50"
+              className="rounded-lg py-4 pl-14 text-sm shadow-xl outline-none focus:ring-2 focus:ring-primary/50"
               placeholder="search item"
               type="text"
             />
