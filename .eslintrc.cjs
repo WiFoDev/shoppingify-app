@@ -25,6 +25,7 @@ const config = {
     "plugin:prettier/recommended",
   ],
   rules: {
+    "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
       {
