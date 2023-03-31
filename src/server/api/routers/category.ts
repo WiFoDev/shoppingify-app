@@ -1,7 +1,16 @@
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { TRPCError } from "@trpc/server";
+import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
 export const categoryRouter = createTRPCRouter({
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.category.findMany();
+  getAll: protectedProcedure.query(({ ctx }) => {
+    const { userId } = ctx.auth;
+    if (!userId) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+    return ctx.prisma.category.findMany({
+      where: {
+        userId: userId,
+      },
+    });
   }),
 });

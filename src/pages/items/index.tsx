@@ -4,11 +4,13 @@ import Image, { type StaticImageData } from "next/image";
 import searchIcon from "~/assets/icons/search.svg";
 import { useSelectedPage } from "~/hooks";
 import { CategoryList } from "~/components";
-import { SignedIn } from "@clerk/nextjs";
+import { SignedIn, useUser } from "@clerk/nextjs";
 
 const Items: NextPage = () => {
   useSelectedPage("items");
+  const { user } = useUser();
 
+  console.log(user?.id);
   return (
     <SignedIn>
       <section className="sm:flex sm:flex-col sm:gap-10 sm:p-6">

@@ -17,16 +17,18 @@ model Item {
     categoryId String
     note       String?  @db.VarChar(255)
     imageUrl   String?
+    userId     String
     category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
-    @@index([id])
+    @@index([id, userId])
     @@index([categoryId])
 }
 
 model Category {
-    id    String @id @default(cuid())
-    name  String
-    items Item[]
+    id     String @id @default(cuid())
+    name   String
+    userId String
+    items  Item[]
 
-    @@index([id])
+    @@index([id, userId])
 }
