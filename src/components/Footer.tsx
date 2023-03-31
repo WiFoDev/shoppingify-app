@@ -33,7 +33,7 @@ export const Footer = () => {
   const [selectedPage] = useAtom(selectedPageAtom);
 
   return (
-    <footer className="shadow-top sm:shadow-right fixed  inset-x-0 bottom-0 h-12 rounded-t-lg bg-white sm:relative sm:flex sm:h-full sm:w-16 sm:flex-col sm:justify-between sm:rounded-r-lg sm:rounded-t-none sm:py-14">
+    <footer className="fixed inset-x-0 bottom-0  h-12 rounded-t-lg bg-white shadow-top sm:relative sm:flex sm:h-full sm:w-16 sm:flex-col sm:justify-between sm:rounded-r-lg sm:rounded-t-none sm:py-14 sm:shadow-right">
       <div className="hidden sm:block sm:px-3">
         <Image
           alt="Shoppingify Logo"

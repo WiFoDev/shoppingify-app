@@ -4,7 +4,7 @@ import { Category } from "./Category";
 
 export const CategoryList = () => {
   const { data, isLoading } = api.categories.getAll.useQuery();
-  console.log(data);
+
   if (isLoading)
     return (
       <div className="grid place-content-center pt-6">
