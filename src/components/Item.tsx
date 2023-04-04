@@ -17,8 +17,9 @@ export const Item: FC<ItemProps> = ({ id, name }) => {
     <motion.li
       key={id}
       animate="show"
-      className="btn-ghost btn flex items-center justify-between rounded-xl text-sm font-medium shadow-xl"
+      className="flex items-center justify-between rounded-xl px-2 py-3 text-sm font-medium shadow-outer"
       initial="hidden"
+      whileHover={{ scale: 1.05 }}
       variants={item}
     >
       {name}

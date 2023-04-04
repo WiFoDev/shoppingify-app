@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { type FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import CreatableSelect from "react-select/creatable";
@@ -32,6 +32,8 @@ const schema = z.object({
   ),
 });
 
+type FormValues = z.infer<typeof schema>;
+
 const createOption = (label: string) => ({
   label,
   value: label,
@@ -46,27 +48,31 @@ export const AddItemForm = () => {
     handleSubmit,
     setValue: setValueForm,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(schema), mode: "onTouched" });
+  } = useForm<FormValues>({ resolver: zodResolver(schema), mode: "onTouched" });
 
   const { data: categoryData, refetch } = api.categories.getAll.useQuery();
-  const { mutate } = api.categories.create.useMutation();
+  const { mutate: mutateCategory } = api.categories.create.useMutation();
+  const { mutate: mutateItem } = api.items.create.useMutation();
 
-  const onSubmit = ({ name, category }: FieldValues) => {
+  const onSubmit = ({ name, category }: FormValues) => {
     const selectedCategory = categoryData?.find(
       ({ name }) => category.value === name
     );
+    if (!selectedCategory) {
+      return;
+    }
     const item = {
       name,
       categoryId: selectedCategory?.id,
     };
-    console.log(item);
+    mutateItem(item);
   };
 
   const options = categoryData?.map(({ name }) => createOption(name)) ?? [];
 
   const handleCreateOption = (inputValue: string) => {
     setIsLoading(true);
-    mutate(inputValue, {
+    mutateCategory(inputValue, {
       onSuccess: () => {
         setValue(createOption(inputValue));
         setValueForm("category", createOption(inputValue));
@@ -155,7 +161,7 @@ export const AddItemForm = () => {
             value={value}
             onChange={(newValue) => {
               setValue(newValue as Option);
-              setValueForm("category", newValue);
+              setValueForm("category", newValue as Option);
             }}
             onCreateOption={handleCreateOption}
           />
