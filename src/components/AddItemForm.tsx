@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { type FieldValues, useForm } from "react-hook-form";
@@ -30,8 +31,6 @@ const schema = z.object({
     { required_error: "Category is required" }
   ),
 });
-
-type FormValues = z.infer<typeof schema>;
 
 const createOption = (label: string) => ({
   label,

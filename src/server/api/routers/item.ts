@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
 export const itemRouter = createTRPCRouter({
-  getByCategoryId: publicProcedure
+  getByCategoryId: protectedProcedure
     .input(
       z.object({
         categoryId: z.string(),
@@ -12,6 +13,24 @@ export const itemRouter = createTRPCRouter({
       return ctx.prisma.item.findMany({
         where: {
           categoryId,
+        },
+      });
+    }),
+  create: protectedProcedure
+    .input(
+      z.object({
+        name: z.string({ required_error: "An item name is required" }),
+        categoryId: z.string({ required_error: "A category id is required" }),
+        note: z.string().optional(),
+        imageUrl: z.string().optional(),
+      })
+    )
+    .mutation(({ ctx, input }) => {
+      const { userId } = ctx.auth;
+      return ctx.prisma.item.create({
+        data: {
+          ...input,
+          userId: userId!,
         },
       });
     }),
