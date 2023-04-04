@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-misused-promises */
-import { Controller, useForm } from "react-hook-form";
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { type FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import CreatableSelect from "react-select/creatable";
@@ -32,41 +31,51 @@ const schema = z.object({
   ),
 });
 
+type FormValues = z.infer<typeof schema>;
+
 const createOption = (label: string) => ({
   label,
-  value: label.toLowerCase().replace(/\W/g, ""),
+  value: label,
 });
 
 export const AddItemForm = () => {
   const [value, setValue] = useState<Option | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
-    control,
+    setValue: setValueForm,
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema), mode: "onTouched" });
 
-  const { data } = api.categories.getAll.useQuery();
-  // const { mutate } = useCategoryMutation();
+  const { data: categoryData, refetch } = api.categories.getAll.useQuery();
+  const { mutate } = api.categories.create.useMutation();
 
-  const onSubmit = (data: any) => console.log(data);
-
-  const options = data?.map(({ name }) => createOption(name)) ?? [];
-
-  const handleCreateOption = (inputValue: string) => {
-    // mutate(
-    //   { name: inputValue },
-    //   {
-    //     onSuccess: () => {
-    //       setValue(createOption(inputValue));
-    //       trigger("category");
-    //     },
-    //   }
-    // );
+  const onSubmit = ({ name, category }: FieldValues) => {
+    const selectedCategory = categoryData?.find(
+      ({ name }) => category.value === name
+    );
+    const item = {
+      name,
+      categoryId: selectedCategory?.id,
+    };
+    console.log(item);
   };
 
-  console.log(value);
+  const options = categoryData?.map(({ name }) => createOption(name)) ?? [];
+
+  const handleCreateOption = (inputValue: string) => {
+    setIsLoading(true);
+    mutate(inputValue, {
+      onSuccess: () => {
+        setValue(createOption(inputValue));
+        setValueForm("category", createOption(inputValue));
+        setIsLoading(false);
+        void refetch();
+      },
+    });
+  };
 
   return (
     <section className="flex flex-col gap-3">
@@ -115,43 +124,41 @@ export const AddItemForm = () => {
         </label>
         <label className="flex flex-col gap-1">
           Category
-          <Controller
-            control={control}
-            name="category"
-            render={({ field }) => (
-              <CreatableSelect
-                {...field}
-                options={options}
-                styles={{
-                  container: (provided) => ({
-                    ...provided,
-                    border: "2px solid #BDBDBD",
-                    borderRadius: "0.75rem",
-                  }),
-                  control: (provided) => ({
-                    ...provided,
-                    border: "none",
-                    borderRadius: "0.75rem",
-                    padding: "0.75rem 0",
-                  }),
-                  menu: (provided) => ({
-                    ...provided,
-                    borderRadius: "0.75rem",
-                  }),
-                  option: (provided) => ({
-                    ...provided,
-                    borderRadius: "0.75rem",
-                    padding: "0.75rem",
-                  }),
-                }}
-                value={value}
-                onChange={(newValue) => {
-                  field.onChange(newValue);
-                  setValue(newValue as Option);
-                }}
-                onCreateOption={handleCreateOption}
-              />
-            )}
+          <CreatableSelect
+            {...register("category")}
+            options={options}
+            isDisabled={isLoading}
+            placeholder={
+              isLoading ? "Creating..." : "Select or create a category"
+            }
+            styles={{
+              container: (provided) => ({
+                ...provided,
+                border: "2px solid #BDBDBD",
+                borderRadius: "0.75rem",
+              }),
+              control: (provided) => ({
+                ...provided,
+                border: "none",
+                borderRadius: "0.75rem",
+                padding: "0.75rem 0",
+              }),
+              menu: (provided) => ({
+                ...provided,
+                borderRadius: "0.75rem",
+              }),
+              option: (provided) => ({
+                ...provided,
+                borderRadius: "0.75rem",
+                padding: "0.75rem",
+              }),
+            }}
+            value={value}
+            onChange={(newValue) => {
+              setValue(newValue as Option);
+              setValueForm("category", newValue);
+            }}
+            onCreateOption={handleCreateOption}
           />
           <span
             className={`${
