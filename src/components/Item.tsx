@@ -12,6 +12,8 @@ const item = {
   show: { translateY: 0, opacity: 1 },
 };
 
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+
 export const Item: FC<ItemProps> = ({ id, name }) => {
   return (
     <motion.li
@@ -22,7 +24,7 @@ export const Item: FC<ItemProps> = ({ id, name }) => {
       whileHover={{ scale: 1.05 }}
       variants={item}
     >
-      {name}
+      {capitalize(name)}
       <Image
         alt="Add item icon"
         className="h-6 w-6"

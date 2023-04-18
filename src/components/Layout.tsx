@@ -4,7 +4,7 @@ import { Quicksand } from "next/font/google";
 
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { SignedIn } from "@clerk/nextjs";
+import { SignedIn, useUser } from "@clerk/nextjs";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -12,9 +12,11 @@ const quicksand = Quicksand({
 });
 
 export const Layout = ({ children }: { children: ReactNode }) => {
+  const { isSignedIn } = useUser();
+
   return (
     <div
-      className={`${quicksand.variable} h-screen font-sans sm:flex sm:flex-row-reverse sm:overflow-hidden`}
+      className={`${quicksand.variable} flex h-screen flex-col font-sans sm:flex sm:flex-row-reverse sm:overflow-hidden`}
     >
       <Head>
         <title>Shoppingify App</title>
@@ -25,10 +27,10 @@ export const Layout = ({ children }: { children: ReactNode }) => {
         <link href="/favicon.ico" rel="icon" />
       </Head>
       <div id="modals" />
-      <SignedIn>
-        <Header />
-      </SignedIn>
-      <main className="flex-1 px-4 pb-16">{children}</main>
+      <Header />
+      <main className={`flex-1 ${isSignedIn ? "px-4 pb-16" : ""}`}>
+        {children}
+      </main>
       <SignedIn>
         <Footer />
       </SignedIn>

@@ -1,7 +1,7 @@
 import { SignUp } from "@clerk/nextjs";
 
 const SignUpPage = () => (
-  <section className="grid w-full place-content-center pt-40">
+  <section className="fixed inset-0 z-10 grid h-screen w-full place-content-center bg-white">
     <SignUp
       path="/sign-up"
       routing="path"
